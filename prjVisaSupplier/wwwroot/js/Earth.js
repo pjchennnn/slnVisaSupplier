@@ -455,3 +455,5 @@
         },
     });
 })();
+
+const g = document.querySelector('g')
