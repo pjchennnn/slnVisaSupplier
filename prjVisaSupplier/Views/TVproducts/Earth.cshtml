@@ -1,0 +1,46 @@
+﻿
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/Earth.css" asp-append-version="true" />
+}
+
+<header>
+    <h1>請從地圖選擇商品</h1>
+</header>
+<main id="app">
+    <label>
+        <span>Simplification:</span>
+        <input type="range" v-model="tolerance" min="0" max="10" step=".01" />
+        <output>{{ tolerance }}</output>
+    </label>
+    <svg id="map" fill="none" stroke="dodgerblue" viewBox="0 10 960 480">
+        <g id="countries">
+            <g v-for="c in simpleCountries" :data-code="c.code">
+                <path v-for="p in c.paths" :d="'M' + p + 'z'"><title>{{ c.code }}</title></path>
+            </g>
+        </g>
+        <g v-if="0" id="borders">
+            <polyline v-for="b in borders" :points="b" />
+        </g>
+    </svg>
+</main>
+<footer>
+    <h2>Sources:</h2>
+    Polylines created with <a href="https://www.naturalearthdata.com/downloads/110m-cultural-vectors/">Natural Earth</a> data and <a href="https://observablehq.com/%40d3/equirectangular">D3</a> projection.
+</footer>
+
+@section Scripts
+{
+    <script>console.clear();</script>
+    <script src="https://unpkg.com/vue@2"> </script>
+    <script src="https://unpkg.com/simplify-js@1"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://unpkg.com/%40sphinxxxx/zoomable-svg@0.2.2/dist/zoomable-svg.min.js"></script>
+    <script src="~/js/Earth.js"></script>
+    <script>
+        const g = document.querySelector('g')
+        g.addEventListener('mouseover', (e) => {
+            e.target.setAttribute("color","blue")
+        })
+    </script>
+}

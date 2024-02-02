@@ -1,0 +1,112 @@
+﻿body {
+    font-family: Georgia, sans-serif;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+    label input {
+        flex: 1 1 auto;
+        margin: 1em;
+    }
+
+    label output {
+        width: 4ch;
+    }
+
+svg {
+    width: 100%;
+    height: auto;
+    background: aliceblue;
+}
+
+    svg #countries g:nth-child(12n + 1) {
+        color: #8dd3c7;
+    }
+
+    svg #countries g:nth-child(12n + 2) {
+        color: #ffffb3;
+    }
+
+    svg #countries g:nth-child(12n + 3) {
+        color: #bebada;
+    }
+
+    svg #countries g:nth-child(12n + 4) {
+        color: #fb8072;
+    }
+
+    svg #countries g:nth-child(12n + 5) {
+        color: #80b1d3;
+    }
+
+    svg #countries g:nth-child(12n + 6) {
+        color: #fdb462;
+    }
+
+    svg #countries g:nth-child(12n + 7) {
+        color: #b3de69;
+    }
+
+    svg #countries g:nth-child(12n + 8) {
+        color: #fccde5;
+    }
+
+    svg #countries g:nth-child(12n + 9) {
+        color: #bc80bd;
+    }
+
+    svg #countries g:nth-child(12n + 10) {
+        color: #ccebc5;
+    }
+
+    svg #countries g:nth-child(12n + 11) {
+        color: #ffed6f;
+    }
+
+    svg #countries g:nth-child(12n + 12) {
+        color: gold;
+    }
+
+    svg #countries g {
+        fill: currentColor;
+        fill-opacity: 0.7;
+    }
+
+    svg #countries path {
+        stroke: black;
+        stroke-width: 0.3;
+        /*/
+   stroke: currentColor;
+   stroke-width: .01;
+   //*/
+    }
+
+    svg #borders polyline {
+        fill: none;
+        stroke: red;
+        stroke-width: 0.01;
+    }
+
+        svg #borders polyline:nth-child(4n + 1) {
+            stroke: tomato;
+            stroke-opacity: 0.7;
+        }
+
+        svg #borders polyline:nth-child(4n + 2) {
+            stroke: lime;
+            stroke-opacity: 0.7;
+        }
+
+        svg #borders polyline:nth-child(4n + 3) {
+            stroke: dodgerblue;
+            stroke-opacity: 0.7;
+        }
+
+        svg #borders polyline:nth-child(4n + 4) {
+            stroke: gold;
+            stroke-opacity: 0.7;
+        }

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<prjVisaSupplier.Models.TVproduct>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FNewOrLost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FInterviewRequirement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FEntityOrElectronic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FEnabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FLengthOfStay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FProcessingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FSupplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FValidityPeriod)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FNewOrLost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FInterviewRequirement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FEntityOrElectronic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FCountry.FCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FLengthOfStay.FLengthOfStay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FProcessingTime.FId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FSupplier.FId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FValidityPeriod.FValidityPeriod)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,84 @@
+﻿@model prjVisaSupplier.Models.TVproduct
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TVproduct</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FId" />
+            <div class="form-group">
+                <label asp-for="FCountryId" class="control-label"></label>
+                <select asp-for="FCountryId" class="form-control" asp-items="ViewBag.FCountryId"></select>
+                <span asp-validation-for="FCountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FSupplierId" class="control-label"></label>
+                <select asp-for="FSupplierId" class="form-control" asp-items="ViewBag.FSupplierId"></select>
+                <span asp-validation-for="FSupplierId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FName" class="control-label"></label>
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FNewOrLost" /> @Html.DisplayNameFor(model => model.FNewOrLost)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FInterviewRequirement" /> @Html.DisplayNameFor(model => model.FInterviewRequirement)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FEntityOrElectronic" /> @Html.DisplayNameFor(model => model.FEntityOrElectronic)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="FProcessingTimeId" class="control-label"></label>
+                <select asp-for="FProcessingTimeId" class="form-control" asp-items="ViewBag.FProcessingTimeId"></select>
+                <span asp-validation-for="FProcessingTimeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FValidityPeriodId" class="control-label"></label>
+                <select asp-for="FValidityPeriodId" class="form-control" asp-items="ViewBag.FValidityPeriodId"></select>
+                <span asp-validation-for="FValidityPeriodId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FLengthOfStayId" class="control-label"></label>
+                <select asp-for="FLengthOfStayId" class="form-control" asp-items="ViewBag.FLengthOfStayId"></select>
+                <span asp-validation-for="FLengthOfStayId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FPrice" class="control-label"></label>
+                <input asp-for="FPrice" class="form-control" />
+                <span asp-validation-for="FPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="FEnabled" /> @Html.DisplayNameFor(model => model.FEnabled)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

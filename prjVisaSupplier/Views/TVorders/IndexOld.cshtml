@@ -1,0 +1,101 @@
+﻿@model IEnumerable<prjVisaSupplier.Models.TVorder>
+
+@{
+    ViewData["Title"] = "IndexOld";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FOrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FDepartureDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FForPickupOrDeliveryAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FInterviewReminder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FEvaluate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FMemo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCoupon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCustomer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FOrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FDepartureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FForPickupOrDeliveryAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FInterviewReminder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FEvaluate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FMemo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FCoupon.FCouponName)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.FCustomer.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FProduct.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FStatus.FVorderStatus)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

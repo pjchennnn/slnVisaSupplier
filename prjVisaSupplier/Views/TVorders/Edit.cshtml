@@ -1,0 +1,89 @@
+﻿@model prjVisaSupplier.Models.TVorder
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TVorder</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FId" />
+            <div class="form-group">
+                <label asp-for="FOrderId" class="control-label"></label>
+                <input asp-for="FOrderId" class="form-control" />
+                <span asp-validation-for="FOrderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FProductId" class="control-label"></label>
+                <select asp-for="FProductId" class="form-control" asp-items="ViewBag.FProductId"></select>
+                <span asp-validation-for="FProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FCustomerId" class="control-label"></label>
+                <select asp-for="FCustomerId" class="form-control" asp-items="ViewBag.FCustomerId"></select>
+                <span asp-validation-for="FCustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FPrice" class="control-label"></label>
+                <input asp-for="FPrice" class="form-control" />
+                <span asp-validation-for="FPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FQuantity" class="control-label"></label>
+                <input asp-for="FQuantity" class="form-control" />
+                <span asp-validation-for="FQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FDepartureDate" class="control-label"></label>
+                <input asp-for="FDepartureDate" class="form-control" />
+                <span asp-validation-for="FDepartureDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FForPickupOrDeliveryAddress" class="control-label"></label>
+                <input asp-for="FForPickupOrDeliveryAddress" class="form-control" />
+                <span asp-validation-for="FForPickupOrDeliveryAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FInterviewReminder" class="control-label"></label>
+                <input asp-for="FInterviewReminder" class="form-control" />
+                <span asp-validation-for="FInterviewReminder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FEvaluate" class="control-label"></label>
+                <input asp-for="FEvaluate" class="form-control" />
+                <span asp-validation-for="FEvaluate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FMemo" class="control-label"></label>
+                <input asp-for="FMemo" class="form-control" />
+                <span asp-validation-for="FMemo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FStatusId" class="control-label"></label>
+                <select asp-for="FStatusId" class="form-control" asp-items="ViewBag.FStatusId"></select>
+                <span asp-validation-for="FStatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FCouponId" class="control-label"></label>
+                <select asp-for="FCouponId" class="form-control" asp-items="ViewBag.FCouponId"></select>
+                <span asp-validation-for="FCouponId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,105 @@
+﻿{
+   "CodeGenerationMode": 3,
+   "ContextClassName": "dbTravalPlatformContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "prjVisaSupplier",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[tCCompanyInfo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCouponList]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tCustomer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVCountry]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVFormPath]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVLengthOfStay]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVOrder]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVOrderStatus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVProcessingTime]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVProduct]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVProductFormsRequired]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVTravelerInfo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[tVValidityPeriod]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[vVOrderView]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vVProductView]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[GetOrderID_V]",
+         "ObjectType": 2
+      }
+   ],
+   "UiHint": "desktop-rae7e6c.dbTravalPlatform.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

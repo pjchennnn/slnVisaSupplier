@@ -1,0 +1,73 @@
+﻿@section Styles {
+    <link href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+    <style>
+        thead {
+            background-color: brown;
+            color: antiquewhite;
+        }
+
+    </style>
+}
+<p>
+    <a asp-action="Create">新增訂單(前台)</a>
+</p>
+<table class="table" id="tVorders">
+    <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>商品名稱</th>
+            <th>訂購人</th>
+            <th>商品價格</th>
+            <th>訂購數量</th>
+            <th>預計出國日</th>
+            <th>自取or配送地址</th>
+            <th>面試提醒</th>
+            <th>訂單評價</th>
+            <th>優惠券</th>
+            <th>訂單總價</th>
+            <th>備註</th>
+            <th>訂單狀態</th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts {
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
+    <script>
+        $(document).ready(
+            function () {
+                $('#tVorders').dataTable(
+                    {
+                        ajax: {
+                            type: 'GET',
+                            url: "/TVorders/IndexJson",
+                            dataSrc: function (json) { return json; }
+                        },
+                        columns: [
+                            { "data": "fOrderId", "width": "10%" },
+                            { "data": "fProductName", "width": "10%" },
+                            { "data": "fCustomerName", "width": "10%" },
+                            { "data": "fPrice", "width": "10%" },
+                            { "data": "fQuantity", "width": "10%" },
+                            { "data": "fDepartureDate", "width": "10%" },
+                            { "data": "fForPickupOrDeliveryAddress", "width": "10%" },
+                            { "data": "fInterviewReminder", "width": "10%" },
+                            { "data": "fEvaluate", "width": "10%" },
+                            { "data": "fCoupon", "width": "10%" },
+                            { "data": "fTotal", "width": "10%" },
+                            { "data": "fMemo", "width": "10%" },
+                            { "data": "fStatus", "width": "10%" }
+                        ],
+                        fixedHeader: {
+                            header: true
+                        },
+                        language: {
+                            url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/zh-HANT.json'
+                        }
+                    }
+                )
+            }
+        );
+    </script>
+}
