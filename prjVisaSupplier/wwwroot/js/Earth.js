@@ -456,5 +456,16 @@
     });
 })();
 
-const g = document.querySelector('g')
-console.log(g)
+const svg = document.getElementById("map")
+const paths = document.getElementsByTagName('path')
+console.log(paths)
+for (var path of paths) {
+    path.classList.add("passive")
+}
+
+
+svg.addEventListener('mousemove', (e) => {
+    e.target.classList.remove("passive")
+    e.target.classList.add("active")
+    console.log(e.target)
+})
