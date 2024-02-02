@@ -457,3 +457,4 @@
 })();
 
 const g = document.querySelector('g')
+console.log(g.children)
