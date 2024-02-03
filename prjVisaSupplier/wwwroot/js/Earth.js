@@ -458,6 +458,7 @@
 
 const paths = document.getElementsByTagName('path');
 const infoBox = document.getElementById("infoBox");
+const svg = document.querySelector('#map');
 
 for (var path of paths) {
     path.classList.add("passive")
@@ -501,3 +502,7 @@ function updateInfoPosition(e) {
     infoBox.style.left = e.pageX + offsetX + "px";
     infoBox.style.top = e.pageY + offsetY + "px";
 }
+
+svg.addEventListener('dblclick', () => {
+    svg.setAttribute("viewBox", "0 10 960 480")
+})
