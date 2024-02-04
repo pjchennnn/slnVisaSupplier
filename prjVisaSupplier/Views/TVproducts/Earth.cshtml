@@ -5,14 +5,9 @@
 }
 
 <header>
-    <h1>請從地圖選擇商品資訊</h1>
+    <h1>請從地圖選擇服務資訊</h1>
 </header>
 <main id="app">
-    <label>
-        <span>Simplification:</span>
-        <input type="range" v-model="tolerance" min="0" max="10" step=".01" />
-        <output>{{ tolerance }}</output>
-    </label>
     <svg id="map" fill="none" stroke="dodgerblue" viewBox="0 10 960 480">
         <g id="countries">
             <g v-for="c in simpleCountries" :data-code="c.code">
@@ -22,7 +17,7 @@
         <g v-if="0" id="borders">
             <polyline v-for="b in borders" :points="b" />
         </g>
-        <div class="info-box" id="infoBox">這裡是資訊</div>
+        <div class="info-box card" id="infoBox" style="width: 9rem;"></div>
     </svg>
 </main>
 <footer>
@@ -36,6 +31,39 @@
     <script src="https://unpkg.com/vue@2"> </script>
     <script src="https://unpkg.com/simplify-js@1"> </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-    <script src="https://unpkg.com/%40sphinxxxx/zoomable-svg@0.2.2/dist/zoomable-svg.min.js"></script>
+    @* <script src="https://unpkg.com/%40sphinxxxx/zoomable-svg@0.2.2/dist/zoomable-svg.min.js"></script> *@
+    <script src="~/js/Zoomable.js" asp-append-version="true"></script>
     <script src="~/js/Earth.js" asp-append-version="true"></script>
+    <script>
+        async function mapSearch(target) {
+            try {
+                const response = await fetch(`@Url.Content("~/TVproducts/searchProductsByCountry")?country=${target}`);
+
+                if (!response.ok) {
+                    console.log(response.status);
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                infoBox.innerHTML = `
+                    <div class="card-body">
+                        <p class="card-title fs-5">${target}</p>
+                        <p class="card-subtitle fs-6">服務數量: ${data.productsCount}</p>
+                        <p class="card-text fs-6">平均價格: ${data.averagePrice}元</p>
+                    </div>
+                    `;
+            } catch (error) {
+                console.error('An error occurred:', error.message);
+                // 可以在这里处理异常，例如显示错误信息到页面上
+                infoBox.innerHTML = `
+                    <div class="card-body">
+                        <p class="card-title fs-5">${target}</p>
+                        <p class="card-subtitle fs-6">服務數量: 0</p>
+                    </div>
+                    `;
+            }
+        }
+    </script>
+
 }

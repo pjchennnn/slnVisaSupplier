@@ -73,48 +73,72 @@ svg {
 
     svg #countries g {
         fill: currentColor;
-        fill-opacity: 0.7;
+        fill-opacity: 0.6;
+        transition: fill-opacity 0.5s ease-in-out; /* 添加过渡效果 */
+        transition: fill 0.5s ease-in-out; /* 添加过渡效果 */
     }
 
     svg #countries path {
         stroke: black;
-        stroke-width: 0.3;
-        /*/
-   stroke: currentColor;
-   stroke-width: .01;
-   //*/
+        stroke-width: 0.2px;
+        transition: stroke-width 0.5s ease-in-out; /* 添加过渡效果 */
+    }
+
+    svg #countries g:hover path {
+        stroke: black;
+        stroke-width: 0.4px;
+    }
+
+    @keyframes shadowFadeIn {
+        0% {
+            opacity: 0;
+            filter: drop-shadow(4px 4px 3px rgba(0, 0, 0, 0));
+        }
+
+        100% {
+            opacity: 1;
+            filter: drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.4));
+        }
+    }
+
+    svg #countries g:hover {
+        animation: shadowFadeIn 0.5s forwards;
+        fill-opacity: 1;
+    }
+
+    svg #countries:hover g:not(:hover) {
+        fill-opacity: 0.25; /* 未悬停时的透明度 */
     }
 
     svg #borders polyline {
         fill: none;
         stroke: red;
-        stroke-width: 0.01;
+        stroke-width: 0.01px;
     }
 
-        svg #borders polyline:nth-child(4n + 1) {
-            stroke: tomato;
-            stroke-opacity: 0.7;
-        }
 
-        svg #borders polyline:nth-child(4n + 2) {
-            stroke: lime;
-            stroke-opacity: 0.7;
-        }
 
-        svg #borders polyline:nth-child(4n + 3) {
-            stroke: dodgerblue;
-            stroke-opacity: 0.7;
-        }
+    svg #borders polyline:nth-child(4n + 1) {
+        stroke: tomato;
+        stroke-opacity: 0.7;
+    }
 
-        svg #borders polyline:nth-child(4n + 4) {
-            stroke: gold;
-            stroke-opacity: 0.7;
-        }
-        
+    svg #borders polyline:nth-child(4n + 2) {
+        stroke: lime;
+        stroke-opacity: 0.7;
+    }
 
-.active {
-    color: darkslategray;
-}
+    svg #borders polyline:nth-child(4n + 3) {
+        stroke: dodgerblue;
+        stroke-opacity: 0.7;
+    }
+
+    svg #borders polyline:nth-child(4n + 4) {
+        stroke: gold;
+        stroke-opacity: 0.7;
+    }
+
+
 
 .info-box {
     position: absolute;

@@ -58,6 +58,14 @@ namespace prjVisaSupplier.Controllers
             return Json(VProducts);
         }
 
+        public IActionResult searchProductsByCountry(string country)
+        {
+            var Products = _context.TVproducts.Include(t => t.FCountry).Where(c => c.FCountry.FCountry == country && c.FEnabled == true).ToList();
+            int productsCount = Products.Count;
+            int averagePrice = Convert.ToInt32(Products.Average(p => p.FPrice));
+            return Json(new { ProductsCount = productsCount, AveragePrice = averagePrice });
+        }
+
         // GET: TVproducts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
