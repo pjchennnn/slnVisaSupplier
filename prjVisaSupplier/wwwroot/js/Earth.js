@@ -445,13 +445,13 @@
             //Log map coordinates on click:
             //https://stackoverflow.com/questions/29261304/how-to-get-the-click-coordinates-relative-to-svg-element-holding-the-onclick-lis */
             var pt = svg.createSVGPoint();  // Created once for document
-            svg.addEventListener('click', function alert_coords(evt) {
-                pt.x = evt.clientX;
-                pt.y = evt.clientY;
-                // The cursor point, translated into svg coordinates
-                var cursorpt = pt.matrixTransform(svg.getScreenCTM().inverse());
-                console.log([cursorpt.x, cursorpt.y].map(c => c.toFixed(1)));
-            });
+            //svg.addEventListener('click', function alert_coords(evt) {
+            //    pt.x = evt.clientX;
+            //    pt.y = evt.clientY;
+            //    // The cursor point, translated into svg coordinates
+            //    var cursorpt = pt.matrixTransform(svg.getScreenCTM().inverse());
+            //    console.log([cursorpt.x, cursorpt.y].map(c => c.toFixed(1)));
+            //});
         },
     });
 })();
