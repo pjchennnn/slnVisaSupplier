@@ -450,7 +450,7 @@
                 pt.y = evt.clientY;
                 // The cursor point, translated into svg coordinates
                 var cursorpt = pt.matrixTransform(svg.getScreenCTM().inverse());
-                //console.log([cursorpt.x, cursorpt.y].map(c => c.toFixed(1)));
+                console.log([cursorpt.x, cursorpt.y].map(c => c.toFixed(1)));
             });
         },
     });

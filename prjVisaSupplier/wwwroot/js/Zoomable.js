@@ -1,4 +1,6 @@
-﻿! function (t, e) {
+﻿const map = document.getElementById('map')
+
+! function (t, e) {
     "object" == typeof exports && "undefined" != typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define(e) : t.zoomableSvg = e()
 }(this, function () {
     "use strict";
@@ -79,33 +81,21 @@
             getViewBox: p
         };
 
-        // 添加双击事件监听器
-        //e.addEventListener('dblclick', function (event) {
-        //    // 双击时将图形状态重置为初始状态
-        //    u = 1; // 重置缩放比例
-        //    h = {
-        //        left: 0,
-        //        top: 0,
-        //        width: l.width,
-        //        height: l.height
-        //    }; // 重置视口状态
-        //    v(); // 更新视口
-        //});
         
         e.addEventListener('dblclick', function (event) {
             // 双击时将图形状态重置为初始状态
             u = 1; // 重置缩放比例
 
             // 获取当前SVG的宽度和高度
-            var svgWidth = e.clientWidth;
-            var svgHeight = e.clientHeight;
+            var svgWidth = 960;
+            var svgHeight = 480;
 
             // 添加过渡效果
             e.style.transition = "viewBox 1s ease-in-out";
 
             h = {
                 left: 0,
-                top: 0,
+                top: 10,
                 width: svgWidth,
                 height: svgHeight
             }; // 重置视口状态
