@@ -31,9 +31,9 @@ namespace prjVisaSupplier.Controllers
         }
 
 
-        public JsonResult IndexJson()
+        public JsonResult VProductsAll()
         {
-            var VProducts = _context.TVproducts
+            var VProductsAll = _context.TVproducts
                                 .Include(t => t.FCountry)
                                 .Include(t => t.FLengthOfStay)
                                 .Include(t => t.FProcessingTime)
@@ -42,7 +42,7 @@ namespace prjVisaSupplier.Controllers
                                 .Select(t => new
                                 {
                                     fName = t.FName,
-                                    fSuppiler = t.FSupplier.FCompanyName,
+                                    fSupplier = t.FSupplier.FCompanyName,
                                     fRegion = t.FCountry.FRegion,
                                     fCountry = t.FCountry.FCountry,
                                     fNewOrLost = t.FNewOrLost,
@@ -55,7 +55,61 @@ namespace prjVisaSupplier.Controllers
                                     fEnabled = t.FEnabled
                                 });
 
-            return Json(VProducts);
+            return Json(VProductsAll);
+        }
+
+        public JsonResult VProductsEnabled()
+        {
+            var VProductsEnabled = _context.TVproducts
+                                .Include(t => t.FCountry)
+                                .Include(t => t.FLengthOfStay)
+                                .Include(t => t.FProcessingTime)
+                                .Include(t => t.FSupplier)
+                                .Include(t => t.FValidityPeriod)
+                                .Where(t => t.FEnabled == true)
+                                .Select(t => new
+                                {
+                                    fName = t.FName,
+                                    fSupplier = t.FSupplier.FCompanyName,
+                                    fRegion = t.FCountry.FRegion,
+                                    fCountry = t.FCountry.FCountry,
+                                    fNewOrLost = t.FNewOrLost,
+                                    fInterviewRequirement = t.FInterviewRequirement,
+                                    fEntityOrElectronic = t.FEntityOrElectronic,
+                                    fProcessingTime = t.FProcessingTime.FProcessingTime,
+                                    fValidityPeriod = t.FValidityPeriod.FValidityPeriod,
+                                    fLengthOfStayId = t.FLengthOfStay.FLengthOfStay,
+                                    fPrice = t.FPrice
+                                });
+
+            return Json(VProductsEnabled);
+        }
+
+        public JsonResult VProductsBySupplier(string company)
+        {
+            var VProductsBySupplier = _context.TVproducts
+                                .Include(t => t.FCountry)
+                                .Include(t => t.FLengthOfStay)
+                                .Include(t => t.FProcessingTime)
+                                .Include(t => t.FSupplier)
+                                .Include(t => t.FValidityPeriod)
+                                .Where(t => t.FSupplier.FCompanyName == company)
+                                .Select(t => new
+                                {
+                                    fName = t.FName,
+                                    fSupplier = t.FSupplier.FCompanyName,
+                                    fRegion = t.FCountry.FRegion,
+                                    fCountry = t.FCountry.FCountry,
+                                    fNewOrLost = t.FNewOrLost,
+                                    fInterviewRequirement = t.FInterviewRequirement,
+                                    fEntityOrElectronic = t.FEntityOrElectronic,
+                                    fProcessingTime = t.FProcessingTime.FProcessingTime,
+                                    fValidityPeriod = t.FValidityPeriod.FValidityPeriod,
+                                    fLengthOfStayId = t.FLengthOfStay.FLengthOfStay,
+                                    fPrice = t.FPrice
+                                });
+
+            return Json(VProductsBySupplier);
         }
 
         public IActionResult searchProductsByCountry(string country)
