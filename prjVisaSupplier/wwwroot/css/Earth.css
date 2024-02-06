@@ -73,15 +73,15 @@ svg {
 
     svg #countries g {
         fill: currentColor;
-        fill-opacity: 0.6;
-        transition: fill-opacity 0.5s ease-in-out; /* 添加过渡效果 */
-        transition: fill 0.5s ease-in-out; /* 添加过渡效果 */
+        fill-opacity: 0.7;
+        transition: fill-opacity 0.3s ease-in-out; /* 添加过渡效果 */
+        transition: fill 0.3s ease-in-out; /* 添加过渡效果 */
     }
 
     svg #countries path {
         stroke: black;
         stroke-width: 0.2px;
-        transition: stroke-width 0.5s ease-in-out; /* 添加过渡效果 */
+        transition: stroke-width 0.3s ease-in-out; /* 添加过渡效果 */
     }
 
     svg #countries g:hover path {
@@ -91,7 +91,7 @@ svg {
 
     @keyframes shadowFadeIn {
         0% {
-            opacity: 0;
+            opacity: 0.4;
             filter: drop-shadow(4px 4px 3px rgba(0, 0, 0, 0));
         }
 
@@ -102,12 +102,12 @@ svg {
     }
 
     svg #countries g:hover {
-        animation: shadowFadeIn 0.5s forwards;
+        animation: shadowFadeIn 0.3s forwards;
         fill-opacity: 1;
     }
 
     svg #countries:hover g:not(:hover) {
-        fill-opacity: 0.25; /* 未悬停时的透明度 */
+        fill-opacity: 0.45; /* 未悬停时的透明度 */
     }
 
     svg #borders polyline {

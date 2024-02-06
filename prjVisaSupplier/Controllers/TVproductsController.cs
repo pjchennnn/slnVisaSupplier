@@ -30,6 +30,23 @@ namespace prjVisaSupplier.Controllers
             return View();
         }
 
+        public JsonResult VVProduct()
+        {
+            var VVProduct = _context.VVproductViews;
+            return Json(VVProduct);
+        }
+        
+        public JsonResult VVProductByCountry(string country)
+        {
+            var VVProductByCountry = _context.VVproductViews.Where(c => c.國家 ==  country);
+            return Json(VVProductByCountry);
+        }
+        
+        public JsonResult VVProductEnabled()
+        {
+            var VVProductEnabled = _context.VVproductViews.Where(e => e.啟用狀態 == true);
+            return Json(VVProductEnabled);
+        }
 
         public JsonResult VProductsAll()
         {

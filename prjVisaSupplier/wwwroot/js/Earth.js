@@ -456,6 +456,21 @@
     });
 })();
 
+(async () => {
+    try {
+        const response = await fetch(fetchString)
+        if (!response.ok) {
+            console.log(response.status);
+            throw new Error(`${response.status}`);
+        }
+        const products = await response.json();
+        p = products;
+    }
+    catch (error) {
+        console.log(`${error.message}`);
+    }
+})();
+
 const paths = document.getElementsByTagName('path');
 const infoBox = document.getElementById("infoBox");
 const svg = document.querySelector('#map');
@@ -502,4 +517,27 @@ function updateInfoPosition(e) {
 
     infoBox.style.left = e.pageX + offsetX + "px";
     infoBox.style.top = e.pageY + offsetY + "px";
+}
+
+function mapSearch(country) {
+    const pFiltered = p.filter(item => item.國家 === country);
+    const pFilteredCount = pFiltered.length;
+    if (pFilteredCount === 0) {
+        infoBox.innerHTML = `
+                                    <div class="card-body">
+                                        <p class="card-title fs-5">${country}</p>
+                                        <p class="card-subtitle fs-6">服務數量: 0</p>
+                                    </div>
+                                    `;
+    }
+    else {
+        let averagePrice = pFiltered.reduce((acc, item) => acc + item.價格, 0) / pFilteredCount;
+        infoBox.innerHTML = `
+                                    <div class="card-body">
+                                        <p class="card-title fs-5">${country}</p>
+                                        <p class="card-subtitle fs-6">服務數量: ${pFilteredCount}</p>
+                                                <p class="card-text fs-6">平均價格: ${averagePrice}元</p>
+                                    </div>
+                                    `;
+    }
 }
