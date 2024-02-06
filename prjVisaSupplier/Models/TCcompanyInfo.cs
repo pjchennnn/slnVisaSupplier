@@ -73,6 +73,10 @@ public partial class TCcompanyInfo
     [StringLength(50)]
     public string FContactEmail { get; set; }
 
+    [Column("fPassword")]
+    [StringLength(50)]
+    public string FPassword { get; set; }
+
     [Column("fContactPhoneCountryCode")]
     [StringLength(50)]
     public string FContactPhoneCountryCode { get; set; }

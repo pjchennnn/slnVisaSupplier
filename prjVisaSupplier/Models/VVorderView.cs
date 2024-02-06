@@ -24,6 +24,9 @@ public partial class VVorderView
     [StringLength(50)]
     public string 商品名稱 { get; set; }
 
+    [StringLength(50)]
+    public string 廠商 { get; set; }
+
     [StringLength(10)]
     public string 訂單日期 { get; set; }
 
@@ -50,4 +53,14 @@ public partial class VVorderView
 
     [StringLength(50)]
     public string 訂單狀態 { get; set; }
+
+    [StringLength(50)]
+    public string 預計出國日期 { get; set; }
+
+    public bool 是否需面試 { get; set; }
+
+    public bool 實體或電子簽 { get; set; }
+
+    [StringLength(50)]
+    public string 備註 { get; set; }
 }

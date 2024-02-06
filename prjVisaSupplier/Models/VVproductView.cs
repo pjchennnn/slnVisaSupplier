@@ -20,6 +20,8 @@ public partial class VVproductView
     [StringLength(50)]
     public string 廠商 { get; set; }
 
+    public bool 面試需要 { get; set; }
+
     [Required]
     [StringLength(50)]
     public string 地區 { get; set; }
