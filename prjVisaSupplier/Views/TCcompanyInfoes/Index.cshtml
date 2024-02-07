@@ -1,0 +1,167 @@
+﻿@model IEnumerable<prjVisaSupplier.Models.TCcompanyInfo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FLanguage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCountry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPhoneCountryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FNameOfPersonInCharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCertificatePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FContactName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FContactPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FContactEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FContactPhoneCountryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FContactPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FContactTimeZone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FIsChecked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FCheckDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FIsInCooperation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FLogo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FCompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPhoneCountryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FNameOfPersonInCharge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FCertificatePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FContactPosition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FContactEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FContactPhoneCountryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FContactPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FContactTimeZone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIsChecked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FCheckDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIsInCooperation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FLogo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
