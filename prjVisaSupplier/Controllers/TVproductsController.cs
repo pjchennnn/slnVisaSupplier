@@ -30,6 +30,13 @@ namespace prjVisaSupplier.Controllers
             return View();
         }
 
+
+        public IActionResult amchart3()
+        {
+            return View();
+        }
+
+
         public JsonResult VVProduct()
         {
             var VVProduct = _context.VVproductViews;

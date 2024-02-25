@@ -1,4 +1,4 @@
-﻿const map = document.getElementById('map')
+﻿//const map = document.getElementById('map')
 
 ! function (t, e) {
     "object" == typeof exports && "undefined" != typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define(e) : t.zoomableSvg = e()
@@ -102,10 +102,11 @@
 
             v(); // 更新视口
 
-            // 在过渡完成后移除过渡效果
-            setTimeout(function () {
-                e.style.transition = "";
-            }, 1000);
+            // 监听过渡完成事件，然后移除过渡效果
+            e.addEventListener('transitionend', function transitionEndHandler() {
+                e.style.transition = ""; // 移除过渡效果
+                e.removeEventListener('transitionend', transitionEndHandler); // 移除事件监听器
+            });
         });
 
         return function () {
