@@ -7,7 +7,7 @@
 
         #chartdiv {
             width: 100%;
-            height: 400px;
+            height: 550px;
         }
 
     </style>
@@ -40,6 +40,34 @@
                 resultObject[country] = countryCount[country];
             });
 
+
+            
+
+            const convertedData = [];
+
+            // 遍历resultObject中的每个键值对
+            for (const country in resultObject) {
+                if (resultObject.hasOwnProperty(country)) {
+                    // 将中文国家名称转换为大写的英文名称
+                    const englishCountry = Object.keys(am5geodata_lang_tw_ZH).find(key => am5geodata_lang_tw_ZH[key] === country);
+                    
+                    // 检查englishCountry是否存在于lang中，如果存在，则获取其对应的字母代号作为id
+                    const id = englishCountry;
+
+                    // 如果id存在，则将该条数据添加到convertedData中
+                    if (id) {
+                        convertedData.push({
+                            id: id,
+                            detail: "商品數量: " + resultObject[country]
+                        });
+                    }
+                }
+            }
+            groupData.push({
+                "name": "商品地區",
+                "data": convertedData
+            });
+
             return true;
         }
         catch (error) {
@@ -57,7 +85,7 @@
 
 @section Scripts
 {
-    
+    <script src="~/js/visaData.js" asp-append-version="true"></script>
     <script src="//cdn.amcharts.com/lib/5/index.js"></script>
     <script src="//cdn.amcharts.com/lib/5/map.js"></script>
     <script src="~/js/worldLow.js" asp-append-version="true"></script>
@@ -65,8 +93,9 @@
     <script src="//cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     
     <script>
+
         
-       
+
         am5.ready(function () {
 
             // Create root element
@@ -88,23 +117,25 @@
                 panX: "rotateX",
                 panY: "none",
                 projection: am5map.geoNaturalEarth1(),
-                rotationX: -154.8
+                rotationX: -5
             }));
 
 
             // Create main polygon series for countries
             // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
             var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-                geoJSON: am5geodata_worldLow
-                //geodataNames: am5geodata_lang_tw_ZH
+                geoJSON: am5geodata_worldLow,
+                geodataNames: am5geodata_lang_tw_ZH
             }));
 
+            //所有顏色單一顏色
+            // polygonSeries.mapPolygons.template.setAll({
+            //     fill: am5.color(0x6794dc)
+            // });
 
 
-
-
+            //隨機顏色
             var colorSet = am5.ColorSet.new(root, {});
-
             var i = 0;
             polygonSeries.mapPolygons.template.adapters.add("fill", function (fill, target) {
                 if (i < 10) {
@@ -116,7 +147,7 @@
                 var dataContext = target.dataItem.dataContext;
                 if (!dataContext.colorWasSet) {
                     dataContext.colorWasSet = true;
-                    var color = am5.Color.saturate(colorSet.getIndex(i), 0.3);
+                    var color = am5.Color.saturate(colorSet.getIndex(i*4), 0.3);
                     target.setRaw("fill", color);
                     return color;
                 }
@@ -125,12 +156,126 @@
                 }
             })
 
+
+
+
+            // Add legend
+            var legend = chart.children.push(am5.Legend.new(root, {
+                useDefaultMarker: true,
+                centerX: am5.p50,
+                x: am5.p50,
+                centerY: am5.p100,
+                y: am5.p100,
+                dy: -20,
+                background: am5.RoundedRectangle.new(root, {
+                    fill: am5.color(0xffffff),
+                    fillOpacity: 0.2
+                })
+            }));
+
+            legend.valueLabels.template.set("forceHidden", true)
+
+
+            // Create series for each group
+            var colors = am5.ColorSet.new(root, {
+                step: 77
+            });
+            colors.next();
+
+
             polygonSeries.mapPolygons.template.states.create("hover", { fillOpacity: 1 });
 
+
+
+            (async () => {
+                const fetchResult = await getProductCount();
+                if (fetchResult === true) {
+
+
+                    am5.array.each(groupData, function (group) {
+                        var countries = [];
+                        var color = colors.next();
+
+                        am5.array.each(group.data, function (country) {
+                            countries.push(country.id)
+                        });
+
+                        console.log("push")
+
+
+
+                        var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+                            geoJSON: am5geodata_worldLow,
+                            include: countries,
+                            name: group.name,
+                            fill: color,
+                            fill: am5.Color.brighten(color, -0.2)
+                        }));
+
+
+                        polygonSeries.mapPolygons.template.setAll({
+                            tooltipText: "{name}[/]\n{detail}",
+                            interactive: true,
+                            fill: color,
+                            strokeWidth: 0.5
+                        });
+
+                        polygonSeries.mapPolygons.template.states.create("hover", {
+                            fill: am5.Color.brighten(color, -0.4)
+                        });
+
+
+                        polygonSeries.mapPolygons.template.events.on("click", (ev) => {
+                            var dataItem = ev.target.dataItem;
+                            var data = dataItem.dataContext;
+                            console.log(data.name)
+                            console.log(data.detail)
+                        });
+
+
+
+
+                        polygonSeries.mapPolygons.template.events.on("pointerout", function (ev) {
+                            ev.target.series.mapPolygons.each(function (polygon) {
+                                polygon.states.applyAnimate("default");
+                            });
+                        });
+                        polygonSeries.data.setAll(group.data);
+
+                        legend.data.push(polygonSeries);
+                    });
+
+
+                }
+                else { console.log('!') }
+            })();
+
+
+            polygonSeries.mapPolygons.template.setAll({
+                tooltipText: "{name}",
+                fillOpacity: 0.8
+            });
+
+
+
+            polygonSeries.mapPolygons.template.events.on("click", (ev) => {
+                var dataItem = ev.target.dataItem;
+                var data = dataItem.dataContext;
+                console.log(data.name)
+                console.log(data.detail)
+            });
+
+
+
+
+
+
+
+            //經緯度網格
             var graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {}));
             graticuleSeries.mapLines.template.setAll({
                 stroke: root.interfaceColors.get("alternativeBackground"),
-                strokeOpacity: 0.1
+                strokeOpacity: 0.04
             });
 
             // Add zoom control
@@ -144,36 +289,73 @@
             })
 
 
+            var backgroundSeries = chart.series.unshift(
+                am5map.MapPolygonSeries.new(root, {})
+            );
+
+            backgroundSeries.mapPolygons.template.setAll({
+                fill: am5.color(0xedf7fa),
+                stroke: am5.color(0xedf7fa),
+            });
+
+            backgroundSeries.data.push({
+                geometry: am5map.getGeoRectangle(90, 180, -90, -180)
+            });
+
+
+
+            // Add projection buttons
+            var buttons = chart.children.push(am5.Container.new(root, {
+                x: am5.p100,
+                dx: -13,
+                centerX: am5.p100,
+                y: am5.p100,
+                dy: -110,
+                centerY: am5.p100,
+                layout: root.verticalLayout,
+                paddingTop: 0,
+                paddingRight: 0,
+                paddingBottom: 0,
+                paddingLeft: 0,
+                background: am5.RoundedRectangle.new(root, {
+                    fill: am5.color(0xffffff),
+                    fillOpacity: 0.3
+                })
+            }));
+
+            function createButton(text, projection) {
+                var button = buttons.children.push(am5.Button.new(root, {
+                    paddingTop: 0,
+                    paddingRight: 0,
+                    paddingBottom: 0,
+                    paddingLeft: 0,
+                    marginTop: 3,
+                    marginLeft: 5,
+                    marginRight: 5,
+                    label: am5.Label.new(root, {
+                        text: text,
+                    })
+                }));
+
+                button.events.on("click", function () {
+                    chart.set("projection", projection);
+                });
+            }
+
+            createButton("1", am5map.geoNaturalEarth1());
+            createButton("2", am5map.geoMercator());
+            createButton("3", am5map.geoEquirectangular());
+            createButton("4", am5map.geoOrthographic());
+
+
+
+
+
+
+
             // Make stuff animate on load
             chart.appear(1000, 100);
-
-
-
-            (async () => {
-                const fetchResult = await getProductCount();
-                if (fetchResult === true) {
-
-                    const polygonData = Object.keys(am5geodata_lang_tw_ZH).map(countryCode => {
-                        const country = am5geodata_lang_tw_ZH[countryCode];
-                        const count = resultObject[country] || 0;
-                        return {
-                            id: countryCode,
-                            productCount: count
-                        };
-                    });
-
-                    polygonSeries.data.setAll(polygonData);
-                    polygonSeries.mapPolygons.template.setAll({
-                        tooltipText: "{name}" + "\n" + "[fontSize: 12px]商品數量: {productCount}",
-                        fillOpacity: 0.8
-                    });
-
-                }
-                else { console.log('!') }
-            })();
-
-            
-        }); // end am5.ready()
+        });
 
        
     
