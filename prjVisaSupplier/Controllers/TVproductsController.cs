@@ -33,9 +33,30 @@ namespace prjVisaSupplier.Controllers
 
         public IActionResult amchart3()
         {
+            var 亞洲 = _context.TVcountries.Where(t => t.FRegion == "亞洲").ToList();
+            var 北美洲 = _context.TVcountries.Where(t => t.FRegion == "北美洲").ToList();
+            var 中南美洲 = _context.TVcountries.Where(t => t.FRegion == "中南美洲").ToList();
+            var 歐洲 = _context.TVcountries.Where(t => t.FRegion == "歐洲").ToList();
+            var 非洲 = _context.TVcountries.Where(t => t.FRegion == "非洲").ToList();
+            var 大洋洲 = _context.TVcountries.Where(t => t.FRegion == "大洋洲").ToList();
+            ViewBag.亞洲 = 亞洲;
+            ViewBag.北美洲 = 北美洲;
+            ViewBag.中南美洲 = 中南美洲;
+            ViewBag.歐洲 = 歐洲;
+            ViewBag.非洲 = 非洲;
+            ViewBag.大洋洲 = 大洋洲;
             return View();
         }
 
+        public IActionResult countries()
+        {
+            var countries = _context.TVcountries.ToList();
+            if (countries != null)
+            {
+                return Json(countries);
+            }
+            return Json(null);
+        }
 
         public JsonResult VVProduct()
         {

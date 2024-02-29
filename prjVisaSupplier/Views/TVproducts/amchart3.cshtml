@@ -1,24 +1,25 @@
 ﻿@section Styles
 {
+    <link rel="stylesheet" href="~/css/cardSlider.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css" />
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         }
-
         #chartdiv {
             width: 100%;
-            height: 550px;
+            height: 600px;
         }
-
     </style>
-    
 }
 <div class="col-sm-6 col-md-6 input-bgcolor">
     <div class="input-wrap">
         <div id="areaDiv" class="input-field searchbar-dropdown">
             <label id="areaLabel" class="">洲別/區域</label>
-            <select type="text" class="input-select">
-                <option>請選擇地區</option>
+            <select type="text" onchange="regionChange(event, this.value);">
+                <option value="0">請選擇地區</option>
                 <option>亞洲</option>
                 <option>北美洲</option>
                 <option>中南美洲</option>
@@ -28,13 +29,7 @@
             </select>
             <label id="areaLabel" class="">國家</label>
             <select type="text" class="input-select">
-                <option>請選擇國家</option>
-                <option>亞洲</option>
-                <option>北美洲</option>
-                <option>中南美洲</option>
-                <option>歐洲</option>
-                <option>非洲</option>
-                <option>大洋洲</option>
+                <option value=0>請選擇國家</option>
             </select>
         </div>
     </div>
@@ -43,14 +38,140 @@
 
 <div id="chartdiv"></div>
 
+<section class="game-section">
+    <h2 class="line-title">快速入口</h2>
+    <div class="owl-carousel custom-carousel owl-theme" id="enterance">
+        <div class="item active" style="background-image: url(/VRegion/台灣.jpg);">
+            <div class="item-desc">
+                <h3>台灣</h3>
+                <p>
+                    <a class="nav-link text-white" asp-area="" asp-controller="TVproducts" asp-action="IndexJson">台灣護照/簽證</a>
+                </p>
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/北美洲.jpg);">
+            <div class="item-desc">
+                <h3>北美洲</h3>
+                <p>
+                    @foreach (var item in ViewBag.北美洲)
+                    {
+                        <a class="nav-link text-white" asp-area="" asp-controller="TVproducts" asp-action="IndexJson">@item.FCountry</a>
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/中南美洲.jpg);">
+            <div class="item-desc">
+                <h3>中南美洲</h3>
+                <p>
+                    @foreach (var item in ViewBag.中南美洲)
+                    {
+                        <a class="nav-link text-white" asp-area="" asp-controller="TVproducts" asp-action="IndexJson">@item.FCountry</a>
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/亞洲.jpg);">
+            <div class="item-desc">
+                <h3>亞洲</h3>
+                <p>
+                    @foreach (var item in ViewBag.亞洲)
+                    {
+                        <a class="nav-link text-white" asp-area="" asp-controller="TVproducts" asp-action="IndexJson">@item.FCountry</a>
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/歐洲.jpg);">
+            <div class="item-desc">
+                <h3>歐洲</h3>
+                <p>
+                    @foreach (var item in ViewBag.歐洲)
+                    {
+                        <a class="nav-link text-white" asp-area="" asp-controller="TVproducts" asp-action="IndexJson">@item.FCountry</a>
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/大洋洲.jpg);">
+            <div class="item-desc">
+                <h3>大洋洲</h3>
+                <p>
+                    @foreach (var item in ViewBag.大洋洲)
+                    {
+                        <a class="nav-link text-white" asp-area="" asp-controller="TVproducts" asp-action="IndexJson">@item.FCountry</a>
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
+<section class="game-section">
+    <h2 class="line-title">熱門申辦項目</h2>
+    <div class="owl-carousel custom-carousel owl-theme" id="enterance">
+        <div class="item active" style="background-image: url(/VRegion/台灣.jpg);">
+            <div class="item-desc">
+                <h3>台灣護照</h3>
+                <p>
+                    台灣護照/簽證
+                </p>
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/中國.jpg);">
+            <div class="item-desc">
+                <h3>台胞證</h3>
+                
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/泰國.jpg);">
+            <div class="item-desc">
+                <h3>泰國簽證</h3>
+                
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/印度.jpg);">
+            <div class="item-desc">
+                <h3>印度簽證</h3>
+                
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/美國.jpg);">
+            <div class="item-desc">
+                <h3>美國簽證</h3>
+                
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/巴西.jpg);">
+            <div class="item-desc">
+                <h3>巴西簽證</h3>
+                
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/杜拜.jpg);">
+            <div class="item-desc">
+                <h3>杜拜簽證</h3>
+                
+            </div>
+        </div>
+        <div class="item" style="background-image: url(/VRegion/越南.jpg);">
+            <div class="item-desc">
+                <h3>越南簽證</h3>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 @section Scripts
 {
     <script>
-        console.clear();
+        let countries = [];
         let resultObject = {};
+        let regions = [];
+
         const fetchString = '@Url.Content("~/TVproducts/VVProductEnabled")'
+
         async function getProductCount() {
             try {
                 const response = await fetch(fetchString)
@@ -73,9 +194,6 @@
                 Object.keys(countryCount).forEach(country => {
                     resultObject[country] = countryCount[country];
                 });
-
-
-
 
                 const convertedData = [];
 
@@ -110,6 +228,35 @@
                 return false;
             }
         }
+
+        (async () => {
+            try {
+                const response = await fetch('@Url.Content("~/TVproducts/countries")')
+                if (!response.ok) {
+                    console.log(response.status);
+                    throw new Error(`${response.status}`);
+                }
+                const datas = await response.json();
+
+                for (var data of datas) {
+                    countries.push(data)
+                }
+
+                var Regions = datas.reduce(function (groups, item) {
+                    if (!groups[item.fRegion]) {
+                        groups[item.fRegion] = [];
+                    }
+                    groups[item.fRegion].push(item);
+                    return groups;
+                }, {});
+                regions = Regions;
+            }
+            catch (error) {
+                console.log(`${error.message}`);
+                console.log('fetchFail')
+                return false;
+            }
+        })();
     </script>
     <script src="~/js/visaData.js" asp-append-version="true"></script>
     <script src="//cdn.amcharts.com/lib/5/index.js"></script>
@@ -117,279 +264,48 @@
     <script src="//cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
     <script src="~/js/translate.js" asp-append-version="true"></script>
     <script src="//cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    
+    <script src="~/js/createMap.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
     <script>
+        function regionChange(e, v) {
+            if (v === 0) {
+                return;
+            }
+            else {
+                const filteredCountries = countries.filter(function (item) {
+                    return item.fRegion === v;
+                });
+                if (filteredCountries.length > 0) {
+                    let html = `<option value=0>請選擇國家</option>`;
+                    for (var c of filteredCountries) {
+                        html += `<option value=${c.fId}>${c.fCountry}</option>`
+                    }
+                    e.target.nextElementSibling.nextElementSibling.innerHTML = html;
+                }
+            }
+        }
+
+        const enterance = document.getElementById('enterance');
 
         
-
-        am5.ready(function () {
-
-            // Create root element
-            // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-            var root = am5.Root.new("chartdiv");
-
-
-            // Set themes
-            // https://www.amcharts.com/docs/v5/concepts/themes/
-            root.setThemes([
-                am5themes_Animated.new(root)
-            ]);
-
-
-            // Create the map chart
-            // https://www.amcharts.com/docs/v5/charts/map-chart/
-            // setting rotationX to -154.8 makes the map Pacific-centered
-            var chart = root.container.children.push(am5map.MapChart.new(root, {
-                panX: "rotateX",
-                panY: "translateY",
-                projection: am5map.geoNaturalEarth1(),
-                rotationX: -5
-            }));
-
-
-            // Create main polygon series for countries
-            // https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
-            var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-                geoJSON: am5geodata_worldLow,
-                geodataNames: am5geodata_lang_tw_ZH
-            }));
-
-            //所有顏色單一顏色
-            // polygonSeries.mapPolygons.template.setAll({
-            //     fill: am5.color(0x6794dc)
-            // });
-
-
-            //隨機顏色
-            var colorSet = am5.ColorSet.new(root, {});
-            var i = 0;
-            polygonSeries.mapPolygons.template.adapters.add("fill", function (fill, target) {
-                if (i < 10) {
-                    i++;
-                }
-                else {
-                    i = 0;
-                }
-                var dataContext = target.dataItem.dataContext;
-                if (!dataContext.colorWasSet) {
-                    dataContext.colorWasSet = true;
-                    var color = am5.Color.saturate(colorSet.getIndex(i*6), 0.38);
-                    target.setRaw("fill", color);
-                    return color;
-                }
-                else {
-                    return fill;
-                }
-            })
-
-
-
-
-            // Add legend
-            var legend = chart.children.push(am5.Legend.new(root, {
-                useDefaultMarker: true,
-                centerX: am5.p50,
-                x: am5.p50,
-                centerY: am5.p100,
-                y: am5.p100,
-                dy: -20,
-                background: am5.RoundedRectangle.new(root, {
-                    fill: am5.color(0xffffff),
-                    fillOpacity: 0.2
-                })
-            }));
-
-            legend.valueLabels.template.set("forceHidden", true)
-
-
-            // Create series for each group
-            var colors = am5.ColorSet.new(root, {
-                step: 77
-            });
-            colors.next();
-
-
-            polygonSeries.mapPolygons.template.states.create("hover", { fillOpacity: 1 });
-
-
-
-            (async () => {
-                const fetchResult = await getProductCount();
-                if (fetchResult === true) {
-
-
-                    am5.array.each(groupData, function (group) {
-                        var countries = [];
-                        var color = colors.next();
-
-                        am5.array.each(group.data, function (country) {
-                            countries.push(country.id)
-                        });
-
-                        console.log("push")
-
-
-
-                        var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-                            geoJSON: am5geodata_worldLow,
-                            include: countries,
-                            name: group.name,
-                            fill: color,
-                            fill: am5.Color.brighten(color, -0.3)
-                        }));
-
-
-                        polygonSeries.mapPolygons.template.setAll({
-                            tooltipText: "{name}[/]\n{detail}",
-                            interactive: true,
-                            fill: color,
-                            strokeWidth: 0.5
-                        });
-
-                        polygonSeries.mapPolygons.template.states.create("hover", {
-                            fill: am5.Color.brighten(color, -0.45)
-                        });
-
-
-                        polygonSeries.mapPolygons.template.events.on("click", (ev) => {
-                            var dataItem = ev.target.dataItem;
-                            var data = dataItem.dataContext;
-                            console.log(data.name)
-                            console.log(data.detail)
-                        });
-
-
-
-
-                        polygonSeries.mapPolygons.template.events.on("pointerout", function (ev) {
-                            ev.target.series.mapPolygons.each(function (polygon) {
-                                polygon.states.applyAnimate("default");
-                            });
-                        });
-                        polygonSeries.data.setAll(group.data);
-
-                        legend.data.push(polygonSeries);
-                    });
-
-
-                }
-                else { console.log('!') }
-            })();
-
-
-            polygonSeries.mapPolygons.template.setAll({
-                tooltipText: "{name}",
-                fillOpacity: 0.8
-            });
-
-
-
-            polygonSeries.mapPolygons.template.events.on("click", (ev) => {
-                var dataItem = ev.target.dataItem;
-                var data = dataItem.dataContext;
-                console.log(data.name)
-                console.log(data.detail)
-            });
-
-
-
-
-
-
-
-            //經緯度網格
-            var graticuleSeries = chart.series.push(am5map.GraticuleSeries.new(root, {}));
-            graticuleSeries.mapLines.template.setAll({
-                stroke: root.interfaceColors.get("alternativeBackground"),
-                strokeOpacity: 0.04
-            });
-
-            // Add zoom control
-            // https://www.amcharts.com/docs/v5/charts/map-chart/map-pan-zoom/#Zoom_control
-            chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
-
-
-            // Set clicking on "water" to zoom out
-            chart.chartContainer.get("background").events.on("click", function () {
-                chart.goHome();
-            })
-
-
-            var backgroundSeries = chart.series.unshift(
-                am5map.MapPolygonSeries.new(root, {})
-            );
-
-            backgroundSeries.mapPolygons.template.setAll({
-                fill: am5.color(0xedf7fa),
-                stroke: am5.color(0xedf7fa),
-            });
-
-            backgroundSeries.data.push({
-                geometry: am5map.getGeoRectangle(90, 180, -90, -180)
-            });
-
-
-
-            // Add projection buttons
-            var buttons = chart.children.push(am5.Container.new(root, {
-                x: am5.p100,
-                dx: -13,
-                centerX: am5.p100,
-                y: am5.p100,
-                dy: -110,
-                centerY: am5.p100,
-                layout: root.verticalLayout,
-                paddingTop: 0,
-                paddingRight: 0,
-                paddingBottom: 0,
-                paddingLeft: 0,
-                background: am5.RoundedRectangle.new(root, {
-                    fill: am5.color(0xffffff),
-                    fillOpacity: 0.3
-                })
-            }));
-
-            function createButton(text, projection, panY, rotationY) {
-                var button = buttons.children.push(am5.Button.new(root, {
-                    paddingTop: 0,
-                    paddingRight: 0,
-                    paddingBottom: 0,
-                    paddingLeft: 0,
-                    marginTop: 3,
-                    marginLeft: 5,
-                    marginRight: 5,
-                    label: am5.Label.new(root, {
-                        text: text,
-                    })
-                }));
-
-                button.events.on("click", function () {
-                    chart.setAll({
-                        projection: projection,
-                        panY: panY,
-                        rotationY: rotationY
-                    });
-                    chart.goHome();
-                });
-            }
-
-            createButton("1", am5map.geoNaturalEarth1(),"translateY",0);
-            createButton("2", am5map.geoMercator(), "none",0);
-            createButton("3", am5map.geoEquirectangular(), "none",0);
-            createButton("4", am5map.geoOrthographic(), "rotateY",0);
-
-
-
-
-
-
-
-            // Make stuff animate on load
-            chart.appear(1000, 100);
-        });
-
-       
-    
     </script>
+
+
+
+
     
+    <script>
+        $(".custom-carousel").owlCarousel({
+  autoWidth: true,
+  loop: true
+});
+$(document).ready(function () {
+  $(".custom-carousel .item").click(function () {
+    $(".custom-carousel .item").not($(this)).removeClass("active");
+    $(this).toggleClass("active");
+  });
+});
+
+    </script>
 }
