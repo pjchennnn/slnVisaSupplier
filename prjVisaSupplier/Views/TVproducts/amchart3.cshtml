@@ -13,70 +13,32 @@
     </style>
     
 }
-<script>
-    console.clear();
-    let resultObject = {};
-    const fetchString = '@Url.Content("~/TVproducts/VVProductEnabled")'
-    async function getProductCount() {
-        try {
-            const response = await fetch(fetchString)
-            if (!response.ok) {
-                console.log(response.status);
-                throw new Error(`${response.status}`);
-            }
-            const data = await response.json();
-
-            const countryCount = {};
-            data.forEach(item => {
-                const country = item["國家"];
-                if (country in countryCount) {
-                    countryCount[country]++;
-                } else {
-                    countryCount[country] = 1;
-                }
-            });
-
-            Object.keys(countryCount).forEach(country => {
-                resultObject[country] = countryCount[country];
-            });
-
-
-            
-
-            const convertedData = [];
-
-            // 遍历resultObject中的每个键值对
-            for (const country in resultObject) {
-                if (resultObject.hasOwnProperty(country)) {
-                    // 将中文国家名称转换为大写的英文名称
-                    const englishCountry = Object.keys(am5geodata_lang_tw_ZH).find(key => am5geodata_lang_tw_ZH[key] === country);
-                    
-                    // 检查englishCountry是否存在于lang中，如果存在，则获取其对应的字母代号作为id
-                    const id = englishCountry;
-
-                    // 如果id存在，则将该条数据添加到convertedData中
-                    if (id) {
-                        convertedData.push({
-                            id: id,
-                            detail: "商品數量: " + resultObject[country]
-                        });
-                    }
-                }
-            }
-            groupData.push({
-                "name": "商品地區",
-                "data": convertedData
-            });
-
-            return true;
-        }
-        catch (error) {
-            console.log(`${error.message}`);
-            console.log('fetchFail')
-            return false;
-        }
-    }
-</script>
+<div class="col-sm-6 col-md-6 input-bgcolor">
+    <div class="input-wrap">
+        <div id="areaDiv" class="input-field searchbar-dropdown">
+            <label id="areaLabel" class="">洲別/區域</label>
+            <select type="text" class="input-select">
+                <option>請選擇地區</option>
+                <option>亞洲</option>
+                <option>北美洲</option>
+                <option>中南美洲</option>
+                <option>歐洲</option>
+                <option>非洲</option>
+                <option>大洋洲</option>
+            </select>
+            <label id="areaLabel" class="">國家</label>
+            <select type="text" class="input-select">
+                <option>請選擇國家</option>
+                <option>亞洲</option>
+                <option>北美洲</option>
+                <option>中南美洲</option>
+                <option>歐洲</option>
+                <option>非洲</option>
+                <option>大洋洲</option>
+            </select>
+        </div>
+    </div>
+</div>
 
 
 <div id="chartdiv"></div>
@@ -85,10 +47,74 @@
 
 @section Scripts
 {
+    <script>
+        console.clear();
+        let resultObject = {};
+        const fetchString = '@Url.Content("~/TVproducts/VVProductEnabled")'
+        async function getProductCount() {
+            try {
+                const response = await fetch(fetchString)
+                if (!response.ok) {
+                    console.log(response.status);
+                    throw new Error(`${response.status}`);
+                }
+                const data = await response.json();
+
+                const countryCount = {};
+                data.forEach(item => {
+                    const country = item["國家"];
+                    if (country in countryCount) {
+                        countryCount[country]++;
+                    } else {
+                        countryCount[country] = 1;
+                    }
+                });
+
+                Object.keys(countryCount).forEach(country => {
+                    resultObject[country] = countryCount[country];
+                });
+
+
+
+
+                const convertedData = [];
+
+                // 遍历resultObject中的每个键值对
+                for (const country in resultObject) {
+                    if (resultObject.hasOwnProperty(country)) {
+                        // 将中文国家名称转换为大写的英文名称
+                        const englishCountry = Object.keys(am5geodata_lang_tw_ZH).find(key => am5geodata_lang_tw_ZH[key] === country);
+
+                        // 检查englishCountry是否存在于lang中，如果存在，则获取其对应的字母代号作为id
+                        const id = englishCountry;
+
+                        // 如果id存在，则将该条数据添加到convertedData中
+                        if (id) {
+                            convertedData.push({
+                                id: id,
+                                detail: "商品數量: " + resultObject[country]
+                            });
+                        }
+                    }
+                }
+                groupData.push({
+                    "name": "商品地區",
+                    "data": convertedData
+                });
+
+                return true;
+            }
+            catch (error) {
+                console.log(`${error.message}`);
+                console.log('fetchFail')
+                return false;
+            }
+        }
+    </script>
     <script src="~/js/visaData.js" asp-append-version="true"></script>
     <script src="//cdn.amcharts.com/lib/5/index.js"></script>
     <script src="//cdn.amcharts.com/lib/5/map.js"></script>
-    <script src="~/js/worldLow.js" asp-append-version="true"></script>
+    <script src="//cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
     <script src="~/js/translate.js" asp-append-version="true"></script>
     <script src="//cdn.amcharts.com/lib/5/themes/Animated.js"></script>
     
@@ -115,7 +141,7 @@
             // setting rotationX to -154.8 makes the map Pacific-centered
             var chart = root.container.children.push(am5map.MapChart.new(root, {
                 panX: "rotateX",
-                panY: "none",
+                panY: "translateY",
                 projection: am5map.geoNaturalEarth1(),
                 rotationX: -5
             }));
@@ -147,7 +173,7 @@
                 var dataContext = target.dataItem.dataContext;
                 if (!dataContext.colorWasSet) {
                     dataContext.colorWasSet = true;
-                    var color = am5.Color.saturate(colorSet.getIndex(i*4), 0.3);
+                    var color = am5.Color.saturate(colorSet.getIndex(i*6), 0.38);
                     target.setRaw("fill", color);
                     return color;
                 }
@@ -209,7 +235,7 @@
                             include: countries,
                             name: group.name,
                             fill: color,
-                            fill: am5.Color.brighten(color, -0.2)
+                            fill: am5.Color.brighten(color, -0.3)
                         }));
 
 
@@ -221,7 +247,7 @@
                         });
 
                         polygonSeries.mapPolygons.template.states.create("hover", {
-                            fill: am5.Color.brighten(color, -0.4)
+                            fill: am5.Color.brighten(color, -0.45)
                         });
 
 
@@ -323,7 +349,7 @@
                 })
             }));
 
-            function createButton(text, projection) {
+            function createButton(text, projection, panY, rotationY) {
                 var button = buttons.children.push(am5.Button.new(root, {
                     paddingTop: 0,
                     paddingRight: 0,
@@ -338,14 +364,19 @@
                 }));
 
                 button.events.on("click", function () {
-                    chart.set("projection", projection);
+                    chart.setAll({
+                        projection: projection,
+                        panY: panY,
+                        rotationY: rotationY
+                    });
+                    chart.goHome();
                 });
             }
 
-            createButton("1", am5map.geoNaturalEarth1());
-            createButton("2", am5map.geoMercator());
-            createButton("3", am5map.geoEquirectangular());
-            createButton("4", am5map.geoOrthographic());
+            createButton("1", am5map.geoNaturalEarth1(),"translateY",0);
+            createButton("2", am5map.geoMercator(), "none",0);
+            createButton("3", am5map.geoEquirectangular(), "none",0);
+            createButton("4", am5map.geoOrthographic(), "rotateY",0);
 
 
 
